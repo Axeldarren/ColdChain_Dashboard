@@ -4,8 +4,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Provider, useSelector } from 'react-redux';
 import { store, RootState } from './redux';
-import Sidebar from '@/components/Sidebar';
-import Navbar from '@/components/Navbar';
 import { useEffect } from 'react';
 
 const geistSans = Geist({
@@ -42,15 +40,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Provider store={store}>
           <DarkModeWrapper>
-            <div className="flex min-h-screen w-full bg-gray-50 dark:bg-gray-900 transition-colors">
-              <Sidebar />
-              <div className="flex flex-1 flex-col">
-                <Navbar />
-                <main className="flex-1 overflow-y-auto p-6">
-                  {children}
-                </main>
-              </div>
-            </div>
+            {children}
           </DarkModeWrapper>
         </Provider>
       </body>
