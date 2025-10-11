@@ -70,7 +70,7 @@ const Sidebar = () => {
 
                 {/* Navigation Links */}
                 <nav className='z-10 w-full'>
-                    <SidebarLink icon={HomeIcon} label='Dashboard' href='/' />
+                    <SidebarLink icon={HomeIcon} label='Dashboard' href='/home' />
                     <SidebarLink icon={Activity} label='Real-time Monitor' href='/monitor' />
                     <SidebarLink icon={BarChartHorizontal} label='Analytics' href='/analytics' />
                     <SidebarLink icon={AlertTriangle} label='Alerts' href='/alerts' />
