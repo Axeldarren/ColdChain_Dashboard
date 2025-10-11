@@ -17,14 +17,16 @@ export default function DashboardLayout({
     <div className="flex min-h-screen w-full bg-gray-50 dark:bg-gray-900 transition-colors">
       <Sidebar />
       <div 
-        className="flex flex-1 flex-col transition-all duration-300 ease-in-out"
+        className="flex flex-1 flex-col transition-all duration-300 ease-in-out min-w-0"
         style={{
           marginLeft: isSidebarCollapsed ? '0' : '256px', // 256px = w-64
         }}
       >
         <Navbar />
-        <main className="flex-1 overflow-y-auto p-6">
-          {children}
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 w-full">
+          <div className="max-w-[1800px] mx-auto">
+            {children}
+          </div>
         </main>
       </div>
     </div>
