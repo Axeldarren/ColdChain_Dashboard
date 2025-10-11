@@ -122,7 +122,7 @@ export default function AlertsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-slate-400">Loading alert settings...</div>
+        <div className="text-gray-500 dark:text-gray-400">Loading alert settings...</div>
       </div>
     );
   }
@@ -131,7 +131,7 @@ export default function AlertsPage() {
     <div className="max-w-7xl mx-auto space-y-8">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-slate-300">Alerts & Thresholds</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Alerts & Thresholds</h1>
       </div>
 
       {/* Threshold Cards */}
@@ -169,34 +169,34 @@ export default function AlertsPage() {
         />
 
         {/* Quiet Hours */}
-        <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-slate-300 mb-4">Quiet Hours</h3>
-          <p className="text-sm text-slate-400 mb-4">
+        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Quiet Hours</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
             Non in-app alerts are suppressed during quiet hours.
           </p>
           
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-400 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Start Time
               </label>
               <input
                 type="time"
                 value={localSettings.quietHours?.start || ''}
                 onChange={(e) => handleQuietHoursChange('start', e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded text-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-slate-400 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 End Time
               </label>
               <input
                 type="time"
                 value={localSettings.quietHours?.end || ''}
                 onChange={(e) => handleQuietHoursChange('end', e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded text-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
           </div>
@@ -207,14 +207,14 @@ export default function AlertsPage() {
       <div className="flex gap-4 justify-end">
         <button
           onClick={() => setShowResetDialog(true)}
-          className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+          className="px-6 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg transition-colors font-medium"
         >
           Reset to Defaults
         </button>
         
         <button
           onClick={handleSave}
-          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium shadow-sm"
         >
           Save Settings
         </button>
@@ -223,18 +223,18 @@ export default function AlertsPage() {
       {/* Reset Confirmation Dialog */}
       {showResetDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-slate-900 border border-slate-800 rounded-lg p-6 max-w-md mx-4">
-            <h3 className="text-lg font-semibold text-slate-300 mb-4">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 max-w-md mx-4 shadow-xl">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
               Reset to Defaults
             </h3>
-            <p className="text-slate-400 mb-6">
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               Are you sure you want to reset all alert settings to their default values? 
               This action cannot be undone.
             </p>
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setShowResetDialog(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition-colors"
+                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded transition-colors"
               >
                 Cancel
               </button>

@@ -31,39 +31,40 @@ const Sidebar = () => {
         (state) => state.global.isSidebarCollapsed,
     );
 
-    const sidebarClassNames = `fixed flex flex-col h-full justify-between
-        transition-all duration-300 z-40 bg-white/80 dark:bg-black/60 backdrop-blur-sm
-        border-r border-gray-100 dark:border-gray-800 overflow-y-auto
-        ${isSidebarCollapsed ? 'w-0 hidden' : 'w-64'}
+    const sidebarClassNames = `fixed left-0 top-0 flex flex-col h-screen justify-between
+        transition-all duration-300 ease-in-out z-40 bg-white dark:bg-gray-900 
+        border-r border-gray-200 dark:border-gray-700 overflow-y-auto shadow-sm dark:shadow-none
+        ${isSidebarCollapsed ? 'w-0' : 'w-64'}
     `;
 
     return (
         <div className={sidebarClassNames}>
-            <div className='flex h-full w-full flex-col justify-start'>
+            <div className='flex h-full w-64 flex-col justify-start'>
                 {/* Header */}
-                <div className='z-50 flex min-h-[56px] w-64 items-center justify-between px-5 py-3 border-b border-gray-100 dark:border-gray-800'>
+                <div className='z-50 flex min-h-[56px] w-64 items-center justify-between px-5 py-3 border-b border-gray-200 dark:border-gray-700'>
                     <div className='flex items-center gap-3'>
-                        <div className='w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center'>
+                        <div className='w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-sm'>
                             <Thermometer className='w-5 h-5 text-white' />
                         </div>
-                        <div className='text-lg font-semibold tracking-tight text-gray-900 dark:text-white'>
+                        <div className='text-lg font-semibold tracking-tight text-gray-900 dark:text-gray-100'>
                             ColdChain
                         </div>
                     </div>
-                    {!isSidebarCollapsed && (
-                        <button className='py-2' onClick={() => dispatch(setIsSidebarCollapsed(true))}>
-                            <X className='h-5 w-5 text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white' />
-                        </button>
-                    )}
+                    <button 
+                        className='p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors' 
+                        onClick={() => dispatch(setIsSidebarCollapsed(true))}
+                    >
+                        <X className='h-5 w-5 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100' />
+                    </button>
                 </div>
 
                 {/* System Status */}
-                <div className='px-5 py-4 border-b border-gray-100 dark:border-gray-800'>
+                <div className='px-5 py-4 border-b border-gray-200 dark:border-gray-700'>
                     <div className='flex items-center gap-2 mb-2'>
                         <div className='w-2 h-2 rounded-full bg-green-500 animate-pulse'></div>
-                        <span className='text-xs font-medium text-gray-600 dark:text-gray-400'>System Online</span>
+                        <span className='text-xs font-medium text-gray-700 dark:text-gray-300'>System Online</span>
                     </div>
-                    <div className='text-xs text-gray-500 dark:text-gray-500'>
+                    <div className='text-xs text-gray-500 dark:text-gray-400'>
                         4 Active Devices
                     </div>
                 </div>
@@ -79,7 +80,7 @@ const Sidebar = () => {
                 {/* Locations Section */}
                 <button 
                     onClick={() => setShowLocations((prev) => !prev)} 
-                    className='flex w-full items-center justify-between px-5 py-2.5 text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-white/5 transition-colors'
+                    className='flex w-full items-center justify-between px-5 py-2.5 text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800 transition-colors'
                 >
                     <span className='text-sm font-medium'>Locations</span>
                     {showLocations ? (
@@ -99,7 +100,7 @@ const Sidebar = () => {
                 {/* Monitoring Parameters */}
                 <button 
                     onClick={() => setShowMonitoring((prev) => !prev)} 
-                    className='flex w-full items-center justify-between px-5 py-2.5 text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-white/5 transition-colors'
+                    className='flex w-full items-center justify-between px-5 py-2.5 text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800 transition-colors'
                 >
                     <span className='text-sm font-medium'>Parameters</span>
                     {showMonitoring ? (
@@ -117,8 +118,8 @@ const Sidebar = () => {
                 )}
 
                 {/* Priority Alerts */}
-                <div className='px-5 py-2.5 mt-4 border-t border-gray-100 dark:border-gray-800'>
-                    <span className='text-xs font-semibold uppercase tracking-wider text-gray-500'>Alert Levels</span>
+                <div className='px-5 py-2.5 mt-4 border-t border-gray-200 dark:border-gray-700'>
+                    <span className='text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400'>Alert Levels</span>
                 </div>
                 <SidebarLink icon={AlertCircle} label='Critical' href='/priority/critical' badge={1} badgeColor="red" />
                 <SidebarLink icon={ShieldAlert} label='Warning' href='/priority/warning' badge={2} badgeColor="orange" />
@@ -155,14 +156,21 @@ const SidebarLink = ({
     return (
         <Link href={href} className="w-full">
             <div 
-                className={`relative flex cursor-pointer items-center gap-3 transition-colors hover:bg-gray-50 dark:hover:bg-white/5 ${
-                    isActive ? "bg-gray-50 dark:bg-white/5" : ""
+                className={`relative flex cursor-pointer items-center gap-3 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                    isActive ? "bg-blue-50 dark:bg-gray-800 border-l-2 border-blue-500" : ""
                 } justify-between px-6 py-2.5`}
             >
                 <div className='flex items-center gap-3'>
-                    {isActive && <div className='absolute left-0 top-1/2 -translate-y-1/2 h-6 w-[3px] rounded-full bg-blue-500' />}
-                    <Icon className='h-5 w-5 flex-shrink-0 text-gray-700 dark:text-gray-200' />
-                    <span className={`text-sm font-medium text-gray-800 dark:text-gray-100 truncate`}>
+                    <Icon className={`h-5 w-5 flex-shrink-0 ${
+                        isActive 
+                            ? 'text-blue-600 dark:text-blue-400' 
+                            : 'text-gray-600 dark:text-gray-300'
+                    }`} />
+                    <span className={`text-sm font-medium truncate ${
+                        isActive 
+                            ? 'text-blue-700 dark:text-blue-300' 
+                            : 'text-gray-700 dark:text-gray-200'
+                    }`}>
                         {label}
                     </span>
                 </div>

@@ -46,16 +46,16 @@ export default function ThresholdCard({
   };
 
   return (
-    <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-slate-300">{title}</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
         <label className="flex items-center gap-2">
-          <span className="text-sm text-slate-400">Enabled</span>
+          <span className="text-sm text-gray-600 dark:text-gray-400">Enabled</span>
           <input
             type="checkbox"
             checked={value.enabled}
             onChange={(e) => handleBooleanChange('enabled', e.target.checked)}
-            className="w-4 h-4 text-blue-600 bg-slate-900 border-slate-800 rounded focus:ring-blue-500 focus:ring-2"
+            className="w-4 h-4 text-blue-600 bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-700 rounded focus:ring-blue-500 focus:ring-2"
           />
         </label>
       </div>
@@ -65,7 +65,7 @@ export default function ThresholdCard({
           <>
             {/* Warning Range */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-400">Warning Range</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Warning Range</label>
               <div className="flex gap-2">
                 <div className="flex-1">
                   <input
@@ -73,10 +73,10 @@ export default function ThresholdCard({
                     placeholder="Min"
                     value={value.warningMin ?? ''}
                     onChange={(e) => handleInputChange('warningMin', e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                   {!validateRange(value.warningMin, value.warningMax) && (
-                    <p className="text-xs text-red-400 mt-1">Min must be ≤ Max</p>
+                    <p className="text-xs text-red-500 dark:text-red-400 mt-1">Min must be ≤ Max</p>
                   )}
                 </div>
                 <div className="flex-1">
@@ -85,18 +85,18 @@ export default function ThresholdCard({
                     placeholder="Max"
                     value={value.warningMax ?? ''}
                     onChange={(e) => handleInputChange('warningMax', e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </div>
               {units.minmax && (
-                <p className="text-xs text-slate-500">{units.minmax}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{units.minmax}</p>
               )}
             </div>
 
             {/* Critical Range */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-400">Critical Range</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Critical Range</label>
               <div className="flex gap-2">
                 <div className="flex-1">
                   <input
@@ -104,10 +104,10 @@ export default function ThresholdCard({
                     placeholder="Min"
                     value={value.criticalMin ?? ''}
                     onChange={(e) => handleInputChange('criticalMin', e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                   {!validateRange(value.criticalMin, value.criticalMax) && (
-                    <p className="text-xs text-red-400 mt-1">Min must be ≤ Max</p>
+                    <p className="text-xs text-red-500 dark:text-red-400 mt-1">Min must be ≤ Max</p>
                   )}
                 </div>
                 <div className="flex-1">
@@ -116,12 +116,12 @@ export default function ThresholdCard({
                     placeholder="Max"
                     value={value.criticalMax ?? ''}
                     onChange={(e) => handleInputChange('criticalMax', e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </div>
               {units.minmax && (
-                <p className="text-xs text-slate-500">{units.minmax}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{units.minmax}</p>
               )}
             </div>
           </>
@@ -129,36 +129,36 @@ export default function ThresholdCard({
           <>
             {/* Warning Duration */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-400">Warning After</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Warning After</label>
               <input
                 type="number"
                 min="0"
                 placeholder="30"
                 value={value.warningDurationSec ?? ''}
                 onChange={(e) => handleInputChange('warningDurationSec', e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               {units.duration && (
-                <p className="text-xs text-slate-500">{units.duration}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{units.duration}</p>
               )}
             </div>
 
             {/* Critical Duration */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-400">Critical After</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Critical After</label>
               <input
                 type="number"
                 min="0"
                 placeholder="120"
                 value={value.criticalDurationSec ?? ''}
                 onChange={(e) => handleInputChange('criticalDurationSec', e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               {units.duration && (
-                <p className="text-xs text-slate-500">{units.duration}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{units.duration}</p>
               )}
               {!validateDuration(value.warningDurationSec, value.criticalDurationSec) && (
-                <p className="text-xs text-red-400">Warning must be ≤ Critical</p>
+                <p className="text-xs text-red-500 dark:text-red-400">Warning must be ≤ Critical</p>
               )}
             </div>
           </>
@@ -166,30 +166,30 @@ export default function ThresholdCard({
 
         {/* Debounce */}
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-400">Debounce</label>
+          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Debounce</label>
           <input
             type="number"
             min="0"
             max="3600"
             value={value.debounceSeconds}
             onChange={(e) => handleNumberChange('debounceSeconds', e.target.value)}
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-          <p className="text-xs text-slate-500">sec</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">sec</p>
         </div>
 
         {/* Hysteresis */}
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-400">Hysteresis</label>
+          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Hysteresis</label>
           <input
             type="number"
             min="0"
             max="50"
             value={value.hysteresisPercent}
             onChange={(e) => handleNumberChange('hysteresisPercent', e.target.value)}
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded text-slate-300 placeholder-slate-500 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-          <p className="text-xs text-slate-500">%</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">%</p>
         </div>
       </div>
     </div>
