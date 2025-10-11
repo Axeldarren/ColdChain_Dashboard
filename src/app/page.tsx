@@ -11,7 +11,7 @@ export default function LandingPage() {
     // TODO: Add authentication check here
     // For now, auto-redirect after a brief moment
     const timer = setTimeout(() => {
-      router.push('/home');
+      // router.push('/home');
     }, 100);
 
     return () => clearTimeout(timer);
