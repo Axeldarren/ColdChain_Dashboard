@@ -1,15 +1,19 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Menu, Moon, Search, Bell, Sun } from "lucide-react";
+import { Menu, Moon, Search, Sun } from "lucide-react";
 import { useAppDispatch, useAppSelector } from '@/app/redux';
 import { setIsDarkMode, setIsSidebarCollapsed } from '@/state';
+import NotificationBell from "@/components/notifications/NotificationBell";
+import NotificationOverlay from "@/components/notifications/NotificationOverlay";
+import Link from "next/link";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(state => state.global.isSidebarCollapsed);
   const isDarkMode = useAppSelector(state => state.global.isDarkMode);
   const [searchValue, setSearchValue] = useState('');
+  const [open, setOpen] = useState(false);
 
   return (
     <div className='flex items-center justify-between bg-white/80 dark:bg-black/60 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 px-4 py-3'>
@@ -57,12 +61,7 @@ const Navbar = () => {
             </div>
 
             {/* Notifications */}
-            <button
-              className="relative p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors dark:text-gray-200 dark:hover:bg-white/5"
-            >
-                <Bell className="h-5 w-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-            </button>
+            <NotificationBell open={open} onToggle={() => setOpen(v => !v)} />
 
             {/* Theme Toggle */}
             <button
@@ -74,11 +73,20 @@ const Navbar = () => {
 
             {/* User Profile */}
             <div className="flex items-center gap-2 pl-2 border-l border-gray-200 dark:border-gray-700">
+              <Link
+                href="/profile"
+                aria-label="Open profile"
+                className="rounded-full h-9 w-9 grid place-items-center border border-slate-300 bg-white hover:bg-slate-50 dark:bg-white/5 dark:border-white/10"
+              >
+                {/* Keep initials/avatar if present; fallback simple initials */}
                 <div className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center text-sm font-semibold">
-                    AD
+                  AD
                 </div>
+              </Link>
             </div>
         </div>
+    {/* overlay (kept outside the height-limited bar) */}
+    <NotificationOverlay open={open} onClose={() => setOpen(false)} />
     </div>
   );
 }
