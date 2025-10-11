@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from '@/app/redux';
 import { setIsSidebarCollapsed } from '@/state';
 import { 
   AlertCircle, 
-  AlertOctagon, 
   AlertTriangle, 
   BarChartHorizontal, 
   ChevronDown, 
@@ -121,9 +120,8 @@ const Sidebar = () => {
                 <div className='px-5 py-2.5 mt-4 border-t border-gray-200 dark:border-gray-700'>
                     <span className='text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400'>Alert Levels</span>
                 </div>
-                <SidebarLink icon={AlertCircle} label='Critical' href='/priority/critical' badge={1} badgeColor="red" />
-                <SidebarLink icon={ShieldAlert} label='Warning' href='/priority/warning' badge={2} badgeColor="orange" />
-                <SidebarLink icon={AlertOctagon} label='Info' href='/priority/info' />
+                <SidebarLink icon={AlertCircle} label='Critical' href='/alert_level/critical' badge={1} badgeColor="red" />
+                <SidebarLink icon={ShieldAlert} label='Warning' href='/alert_level/warning' badge={2} badgeColor="orange" />
             </div>
         </div>
     );
@@ -145,7 +143,7 @@ const SidebarLink = ({
     badgeColor = 'blue',
 }: SidebarLinkProps) => {
     const pathname = usePathname();
-    const isActive = pathname === href;
+    const isActive = pathname?.startsWith(href);
 
     const badgeColors = {
         red: 'bg-red-500',
@@ -156,8 +154,14 @@ const SidebarLink = ({
     return (
         <Link href={href} className="w-full">
             <div 
-                className={`relative flex cursor-pointer items-center gap-3 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                    isActive ? "bg-blue-50 dark:bg-gray-800 border-l-2 border-blue-500" : ""
+                className={`relative flex cursor-pointer items-center gap-3 transition-colors ${
+                    isActive 
+                        ? href.includes('critical') 
+                            ? "bg-rose-500/15 text-rose-200" 
+                            : href.includes('warning')
+                            ? "bg-amber-500/15 text-amber-200"
+                            : "bg-gray-50 dark:bg-white/5"
+                        : "hover:bg-gray-50 dark:hover:bg-white/5"
                 } justify-between px-6 py-2.5`}
             >
                 <div className='flex items-center gap-3'>
