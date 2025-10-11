@@ -37,11 +37,13 @@ export default function NotificationBell({ open, onToggle }: Props) {
       onClick={onToggle}
       className={cls(
         "relative rounded-full p-2 border transition",
-        open ? "bg-slate-100 border-slate-300" : "bg-white border-slate-200 hover:bg-slate-50"
+        open
+          ? "bg-slate-100 border-slate-300 dark:bg-slate-800 dark:border-slate-600"
+          : "bg-white border-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:hover:bg-slate-800"
       )}
     >
       {/* simple bell svg */}
-      <svg width="20" height="20" viewBox="0 0 24 24" className="text-slate-700">
+      <svg width="20" height="20" viewBox="0 0 24 24" className="text-slate-700 dark:text-slate-200">
         <path fill="currentColor" d="M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2m6-6V11a6 6 0 1 0-12 0v5L4 18v1h16v-1z"/>
       </svg>
       {unread > 0 && (

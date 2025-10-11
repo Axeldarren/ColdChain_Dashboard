@@ -44,7 +44,10 @@ export default function NotificationOverlay({ open, onClose }: Props) {
       <div className="absolute inset-0 bg-black/0" />
       <div
         ref={ref}
-        className="pointer-events-auto absolute right-4 top-16 w-[380px] max-h-[70vh] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl"
+        className="pointer-events-auto absolute right-4 top-16 w-[380px] max-h-[70vh] overflow-hidden
+             rounded-xl border bg-white shadow-2xl
+             border-slate-200 dark:border-slate-700
+             dark:bg-slate-900"
         role="dialog" aria-label="Notifications"
       >
         <Header onClose={onClose} count={list.length} />
@@ -63,11 +66,18 @@ export default function NotificationOverlay({ open, onClose }: Props) {
 
 function Header({ onClose, count }: { onClose: () => void; count: number }) {
   return (
-    <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 bg-slate-50/80 backdrop-blur">
-      <div className="text-sm font-medium text-slate-800">Notifications</div>
+    <div className="flex items-center justify-between px-4 py-3
+                border-b border-slate-200 bg-slate-50/80 backdrop-blur
+                dark:border-slate-700 dark:bg-slate-800/60">
+      <div className="text-sm font-medium text-slate-800 dark:text-slate-100">Notifications</div>
       <div className="flex items-center gap-2">
-        <span className="text-xs text-slate-500">{count} items</span>
-        <button onClick={onClose} className="rounded-md px-2 py-1 text-xs border border-slate-300 hover:bg-slate-100">
+        <span className="text-xs text-slate-500 dark:text-slate-400">{count} items</span>
+        <button
+          onClick={onClose}
+          className="rounded-md px-2 py-1 text-xs border
+               border-slate-300 hover:bg-slate-100
+               dark:border-slate-600 dark:hover:bg-slate-800 dark:text-slate-200"
+        >
           Close
         </button>
       </div>
@@ -77,32 +87,34 @@ function Header({ onClose, count }: { onClose: () => void; count: number }) {
 
 function Row({ item, onAck }: { item: AlertItem; onAck: () => void }) {
   const t = fmtTime(item.ts);
-  const color =
+  const tone =
     item.severity === "critical"
-      ? "bg-rose-50 text-rose-800 border-rose-200"
-      : "bg-amber-50 text-amber-800 border-amber-200";
+      ? "bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-500/15 dark:text-rose-200 dark:border-rose-600/40"
+      : "bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-500/15 dark:text-amber-200 dark:border-amber-600/40";
 
   return (
-    <div className="p-3 flex gap-3 items-start">
+    <div className="p-3 flex gap-3 items-start bg-white dark:bg-transparent">
       {/* severity dot */}
       <span className={cls("mt-1 h-2.5 w-2.5 rounded-full", item.severity === "critical" ? "bg-rose-500" : "bg-amber-500")} />
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
-          <span className={cls("px-1.5 py-0.5 rounded border text-[11px] font-medium", color)}>
+          <span className={cls("px-1.5 py-0.5 rounded border text-[11px] font-medium", tone)}>
             {item.severity.toUpperCase()}
           </span>
-          <span className="px-1.5 py-0.5 rounded border text-[11px] font-medium bg-sky-50 text-sky-800 border-sky-200">
+          <span className="px-1.5 py-0.5 rounded border text-[11px] font-medium
+                 bg-sky-50 text-sky-800 border-sky-200
+                 dark:bg-sky-500/10 dark:text-sky-300 dark:border-sky-600/40">
             {item.metric}
           </span>
-          <span className="text-xs text-slate-500" title={t.date}>{t.rel}</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400" title={t.date}>{t.rel}</span>
         </div>
-        <div className="text-sm text-slate-800 mt-1 break-words">
+        <div className="text-sm text-slate-800 dark:text-slate-100 mt-1 break-words">
           <span className="font-medium">{item.location}</span>
           <span className="text-slate-400 mx-1">•</span>
           <span>{item.message}</span>
         </div>
-        <div className="text-xs text-slate-500 mt-0.5">
-          Value: <span className="text-slate-700">{fmtValue(item.metric, item.value)}</span>
+        <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+          Value: <span className="text-slate-700 dark:text-slate-200">{fmtValue(item.metric, item.value)}</span>
         </div>
       </div>
       {item.acknowledged ? (
@@ -110,7 +122,9 @@ function Row({ item, onAck }: { item: AlertItem; onAck: () => void }) {
       ) : (
         <button
           onClick={onAck}
-          className="self-center rounded-md px-2 py-1 text-xs border border-slate-300 hover:bg-slate-100"
+          className="self-center rounded-md px-2 py-1 text-xs border
+             border-slate-300 hover:bg-slate-100
+             dark:border-slate-600 dark:hover:bg-slate-800 dark:text-slate-200"
         >
           Acknowledge
         </button>
@@ -121,13 +135,15 @@ function Row({ item, onAck }: { item: AlertItem; onAck: () => void }) {
 
 function Footer() {
   return (
-    <div className="px-4 py-2 border-t border-slate-200 bg-white flex items-center justify-between">
-      <a href="/alert_level" className="text-xs text-slate-600 hover:text-slate-900 underline">
+    <div className="px-4 py-2 border-t border-slate-200 bg-white
+                dark:border-slate-700 dark:bg-slate-900
+                flex items-center justify-between">
+      <a href="/alert_level" className="text-xs text-slate-600 hover:text-slate-900 underline dark:text-slate-300 dark:hover:text-white">
         View all alerts
       </a>
       <button
         onClick={() => setLastSeenTs(Date.now())}
-        className="text-xs text-slate-600 hover:text-slate-900"
+        className="text-xs text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
       >
         Mark all as read
       </button>
